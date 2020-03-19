@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<include name="View_500_Wall">
+		<control type="group">
+			<include>OpenClose_Right</include>
+			<left>40</left>
+			<top>0</top>
+			<visible>Control.IsVisible(500)</visible>
+			<include>Visible_Right</include>
+			<control type="panel" id="500">
+				<left>0</left>
+				<top>-30</top>
+				<width>100%</width>
+				<onleft>9000</onleft>
+				<onright>531</onright>
+				<onup condition="Integer.IsGreater(Container.NumPages,1)">500</onup>
+				<onup condition="!Integer.IsGreater(Container.NumPages,1)">9000</onup>
+				<ondown>500</ondown>
+				<height>102%</height>
+				<onfocus condition="Container.Content(movies) | Container.Content(tvshows)">RunScript(script.skin.helper.service,action=stripstring,splitchar==,string=$INFO[Container.FolderPath],output=SubFolderPath,index=-1)</onfocus>
+				<onunfocus condition="Container.Content(movies) | Container.Content(tvshows)">RunScript(script.skin.helper.service,action=stripstring,splitchar==,string=$INFO[Container.FolderPath],output=SubFolderPath,index=-1)</onunfocus>				<viewtype label="31102">icon</viewtype>
+				<preloaditems>2</preloaditems>
+				<pagecontrol>531</pagecontrol>
+				<scrolltime tween="cubic" easing="out">500</scrolltime>
+				<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(episodes) | Container.Content(seasons) | Container.Content(artists) | Container.Content(albums) | Container.Content(musicvideos) | Container.Content(addons) | Container.Content(images) | Container.Content(videos) | Container.Content(games)</visible>
+				<itemlayout height="380" width="255" condition="Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons)">
+					<control type="group">
+						<top>120</top>
+						<include>InfoWallMovieLayout</include>
+					</control>
+				</itemlayout>
+				<focusedlayout height="380" width="255" condition="Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons)">
+					<control type="group">
+						<depth>DepthContentPopout</depth>
+						<animation effect="zoom" start="100" end="110" time="200" tween="sine" easing="inout" center="160,300">Focus</animation>
+						<animation effect="zoom" start="110" end="100" time="200" tween="sine" easing="inout" center="160,300">UnFocus</animation>
+						<top>120</top>
+						<include content="InfoWallMovieLayout">
+							<param name="focused" value="true" />
+						</include>
+					</control>
+				</focusedlayout>
+				<itemlayout height="301" width="300" condition="Container.Content(videos) | Container.Content(musicvideos) | Container.Content(episodes)">
+					<control type="group">
+						<top>110</top>
+						<include content="InfoWallEpisodeLayout">
+							<param name="label" value="$INFO[ListItem.Label]" />
+							<param name="thumb_label" value="$INFO[ListItem.Label2]" />
+						</include>
+					</control>
+				</itemlayout>
+				<focusedlayout height="301" width="300" condition="Container.Content(videos) | Container.Content(musicvideos) | Container.Content(episodes)">
+					<control type="group">
+						<depth>DepthContentPopout</depth>
+						<animation effect="zoom" start="100" end="110" time="200" tween="sine" easing="inout" center="160,280">Focus</animation>
+						<animation effect="zoom" start="110" end="100" time="200" tween="sine" easing="inout" center="160,280">UnFocus</animation>
+						<top>110</top>
+						<include content="InfoWallEpisodeLayout">
+							<param name="focused" value="true" />
+							<param name="thumb_label" value="$INFO[ListItem.Label2]" />
+						</include>
+					</control>
+				</focusedlayout>
+				<itemlayout height="425" width="442" condition="Container.Content(images)">
+					<control type="group">
+						<left>40</left>
+						<top>150</top>
+						<include>InfoWallPictureLayout</include>
+					</control>
+				</itemlayout>
+				<focusedlayout height="425" width="442" condition="Container.Content(images)">
+					<control type="group">
+						<depth>DepthContentPopout</depth>
+						<animation effect="zoom" start="100" end="110" time="200" tween="sine" easing="inout" center="220,330">Focus</animation>
+						<animation effect="zoom" start="110" end="100" time="200" tween="sine" easing="inout" center="220,330">UnFocus</animation>
+						<left>40</left>
+						<top>150</top>
+						<include content="InfoWallPictureLayout">
+							<param name="focused" value="true" />
+						</include>
+					</control>
+				</focusedlayout>
+				<itemlayout height="401" width="300" condition="Container.Content(artists) | Container.Content(albums)">
+					<control type="group">
+						<top>150</top>
+						<include content="InfoWallMusicLayout">
+							<param name="fallback_image" value="DefaultMusicSongs.png" />
+						</include>
+					</control>
+				</itemlayout>
+				<focusedlayout height="401" width="300" condition="Container.Content(artists) | Container.Content(albums)">
+					<control type="group">
+						<depth>DepthContentPopout</depth>
+						<top>150</top>
+						<animation effect="zoom" start="100" end="110" time="200" tween="sine" easing="inout" center="160,350">Focus</animation>
+						<animation effect="zoom" start="110" end="100" time="200" tween="sine" easing="inout" center="160,350">UnFocus</animation>
+						<include content="InfoWallMusicLayout">
+							<param name="fallback_image" value="DefaultMusicSongs.png" />
+							<param name="focused" value="true" />
+						</include>
+					</control>
+				</focusedlayout>
+				<itemlayout height="370" width="300" condition="Container.Content(addons)">
+					<control type="group">
+						<top>120</top>
+						<include content="InfoWallMusicLayout">
+							<param name="fallback_image" value="DefaultAddon.png" />
+						</include>
+					</control>
+				</itemlayout>
+				<focusedlayout height="370" width="300" condition="Container.Content(addons)">
+					<control type="group">
+						<depth>DepthContentPopout</depth>
+						<top>120</top>
+						<animation effect="zoom" start="100" end="105" time="200" tween="sine" easing="inout" center="150,250">Focus</animation>
+						<animation effect="zoom" start="105" end="100" time="200" tween="sine" easing="inout" center="150,250">UnFocus</animation>
+						<include content="InfoWallMusicLayout">
+							<param name="fallback_image" value="DefaultAddon.png" />
+							<param name="focused" value="true" />
+						</include>
+					</control>
+				</focusedlayout>
+			</control>
+		</control>
+
+		<!-- Info -->
+		<control type="group">
+			<visible>Control.IsVisible(500) + [Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.Content(seasons) | Container.Content(episodes)]</visible>
+			<height>280</height>
+			<width>1920</width>
+			<left>0</left>
+			<top>850</top>
+			<include content="ContentPanel">
+				<param name="width" value="2000" />
+			</include>
+			<include content="ContentPanel">
+				<param name="width" value="2000" />
+			</include>
+			<control type="group">
+				<top>15</top>
+				<height>270</height>
+				<width>1920</width>
+				<align>center</align>
+				<control type="label">
+					<centerleft>50%</centerleft>
+					<align>center</align>
+					<width>80%</width>
+					<label>$INFO[ListItem.Label]</label>
+					<font>font_title</font>
+					<textcolor>$VAR[AccentColor]</textcolor>
+				</control>
+				<control type="textbox">
+					<centerleft>50%</centerleft>
+					<align>center</align>
+					<top>52</top>
+					<height>100</height>
+					<width>1500</width>
+					<autoscroll time="3000" delay="7000" repeat="5000">!System.HasModalDialog + Skin.HasSetting(AutoScroll)</autoscroll>
+					<label>$INFO[ListItem.Plot]</label>
+					<font>font_description</font>
+				</control>
+			</control>
+			<control type="group">
+				<top>0</top>
+				<centerleft>50%</centerleft>
+				<width>1920</width>
+				<include content="MediaFlagsBottom">
+					<param name="left">0</param>
+					<param name="bottom">10</param>
+					<param name="align">center</param>
+					<param name="width">1920</param>
+					<param name="visible">false</param>
+				</include>
+			</control>
+		</control>
+	</include>
+</includes>

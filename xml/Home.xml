@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<onload>RunScript(script.skinshortcuts,type=buildxml&amp;mainmenuID=9000&amp;group=mainmenu|searchmenu|addonsmenu)</onload>
+	<onload>Skin.SetBool(SkinHelper.EnableExtendedArt)</onload>
+	<onload>Skin.SetBool(SkinHelper.EnableMusicArt)</onload>
+	<onload>Skin.SetBool(SkinHelper.EnableAddonsLookups)</onload>
+	<defaultcontrol>9000</defaultcontrol>
+	<include>DefaultBackground</include>
+	<controls>
+		<control type="button" id="20000">
+			<include>HiddenObject</include>
+			<animation effect="fade" time="300" start="100" end="0">Focus</animation>
+			<onfocus>SetFocus(2000)</onfocus>
+			<onclick>noop</onclick>
+			<visible allowhiddenfocus="true">Control.HasFocus(20000)</visible>
+		</control>
+		<control type="button" id="20001">
+			<include>HiddenObject</include>
+			<animation effect="fade" time="300" start="100" end="0">Focus</animation>
+			<onfocus>SetFocus(2000)</onfocus>
+			<onclick>noop</onclick>
+			<visible allowhiddenfocus="true">Control.HasFocus(20001)</visible>
+		</control>
+		<backgroundcolor>background</backgroundcolor>
+
+		<!-- Fallback / Default Background
+		<include>DefaultBackground</include>
+		<control type="image">
+			<depth>DepthBackground</depth>
+			<include>FullScreenDimensions</include>
+			<aspectratio>scale</aspectratio>
+			<imagepath background="true" colordiffuse="$VAR[BackgroundDiffuseColor]">$INFO[Skin.String(HomeFanart.path)]settings$INFO[Skin.String(HomeFanart.ext)]</imagepath>
+			<visible>!Player.HasMedia + !String.IsEmpty(Skin.String(HomeFanart.path))</visible>
+		</control> -->
+
+		<!-- Set Home MultiImage Background  -->
+		<control type="group">
+			<control type="multiimage">
+				<depth>DepthBackground</depth>
+				<include>FullScreenDimensions</include>
+				<aspectratio>scale</aspectratio>
+				<fadetime>600</fadetime>
+				<animation effect="zoom" center="auto" end="102,102" time="0" condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>
+				<animation effect="fade" start="0" end="100" time="400">WindowOpen</animation>
+				<animation effect="fade" start="100" end="0" time="300">WindowClose</animation>
+				<animation effect="fade" time="400">VisibleChange</animation>
+				<imagepath background="true">$VAR[BackgroundsFolder]</imagepath>
+				<timeperimage>20000</timeperimage>
+				<randomize>true</randomize>
+			</control>
+			
+			<!-- Background Overlay -->
+			<control type="image">
+				<aspectratio>scale</aspectratio>
+				<include>FullScreenDimensions</include>
+				<depth>DepthBackground</depth>
+				<texture colordiffuse="$VAR[BackgroundDiffuseColor]">colors/white.png</texture>
+			</control>
+			
+			<!-- Background Texture Overlay -->
+			<control type="image">
+				<aspectratio>scale</aspectratio>
+				<include>FullScreenDimensions</include>
+				<depth>DepthBackground</depth>
+				<texture>$VAR[BackgroundTextureOverlay]</texture>
+				<colordiffuse>$VAR[BackgroundTextureOverlayColor]</colordiffuse>
+			</control>
+		</control>
+
+		<control type="group">
+			<animation effect="fade" start="100" end="0" time="200" tween="sine" condition="$EXP[infodialog_active]">Conditional</animation>
+			<!-- Clock etc... -->
+			<include content="TopBar">
+				<param name="breadcrumbs_label" value="" />
+			</include>
+
+			<!-- Kodi Logo -->
+			<control type="group">
+				<depth>DepthBars</depth>
+				<animation effect="slide" end="0,-90" time="300" tween="sine" easing="inout" condition="$EXP[infodialog_active]">conditional</animation>
+				<animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
+				<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+				<top>30</top>
+				<left>80</left>
+				<control type="image">
+					<aspectratio>keep</aspectratio>
+					<width>35</width>
+					<height>35</height>
+					<texture>icons/logo.png</texture>
+					<colordiffuse>$VAR[KodiLogoColor]</colordiffuse>
+				</control>
+				<control type="image">
+					<left>-10</left>
+					<top>5</top>
+					<aspectratio>keep</aspectratio>
+					<width>192</width>
+					<height>25</height>
+					<texture>icons/logo-text.png</texture>
+					<colordiffuse>$VAR[KodiLogoTextColor]</colordiffuse>
+				</control>
+			</control>
+
+			<!-- Above Menu Controls -->
+			<control type="group">
+				<control type="grouplist" id="700">
+					<orientation>horizontal</orientation>
+					<itemgap>-20</itemgap>
+					<width>450</width>
+					<height>110</height>
+					<top>765</top>
+					<left>50</left>
+					<ondown>9000</ondown>
+					<defaultcontrol>701</defaultcontrol>
+					<include content="IconButton">
+						<param name="height">90</param>
+						<param name="width">90</param>
+						<param name="radioposx">28</param>
+						<param name="radioposy">0</param>
+						<param name="radiowidth">35</param>
+						<param name="radioheight">35</param>
+						<param name="control_id" value="701" />
+						<param name="onclick" value="ActivateWindow(favourites)" />
+						<param name="icon" value="icons/favourites.png" />
+						<param name="label" value="Favourites" />
+					</include>
+					<include content="IconButton">
+						<param name="height">90</param>
+						<param name="width">90</param>
+						<param name="radioposx">28</param>
+						<param name="radioposy">0</param>
+						<param name="radiowidth">35</param>
+						<param name="radioheight">35</param>
+						<param name="control_id" value="702" />
+						<param name="onclick" value="ActivateWindow(1107)" />
+						<param name="icon" value="icons/search.png" />
+						<param name="label" value="$LOCALIZE[137]" />
+					</include>
+					<include content="IconButton">
+						<param name="height">90</param>
+						<param name="width">90</param>
+						<param name="radioposx">28</param>
+						<param name="radioposy">0</param>
+						<param name="radiowidth">35</param>
+						<param name="radioheight">35</param>
+						<param name="control_id" value="703" />
+						<param name="onclick" value="ActivateWindow(1108)" />
+						<param name="icon" value="icons/add-ons.png" />
+						<param name="label" value="Addons" />
+					</include>
+					<include content="IconButton">
+						<param name="height">90</param>
+						<param name="width">90</param>
+						<param name="radioposx">28</param>
+						<param name="radioposy">0</param>
+						<param name="radiowidth">35</param>
+						<param name="radioheight">35</param>
+						<param name="control_id" value="704" />
+						<param name="onclick" value="ActivateWindow(settings)" />
+						<param name="icon" value="icons/settings.png" />
+						<param name="label" value="$LOCALIZE[21417]" />
+					</include>
+					<include content="IconButton">
+						<param name="control_id" value="705" />
+						<param name="onclick" value="ActivateWindow(shutdownmenu)" />
+						<param name="icon" value="icons/power.png" />
+						<param name="label" value="$LOCALIZE[33060]" />
+						<param name="height">90</param>
+						<param name="width">90</param>
+						<param name="radioposx">28</param>
+						<param name="radioposy">0</param>
+						<param name="radiowidth">35</param>
+						<param name="radioheight">35</param>
+					</include>
+					<include content="IconButton">
+						<param name="control_id" value="706" />
+						<param name="onclick" value="Fullscreen" />
+						<param name="icon" value="icons/now-playing/fullscreen.png" />
+						<param name="label" value="$LOCALIZE[31000]" />
+						<param name="visible" value="Player.HasMedia" />
+						<param name="height">90</param>
+						<param name="width">90</param>
+						<param name="radioposx">28</param>
+						<param name="radioposy">0</param>
+						<param name="radiowidth">35</param>
+						<param name="radioheight">35</param>
+					</include>
+				</control>
+			</control>
+
+			<!-- Menu -->
+			<control type="group">
+				<height>270</height>
+				<width>1920</width>
+				<left>0</left>
+				<top>875</top>
+				<depth>DepthContentPanel</depth>
+				<include content="ContentPanel">
+					<param name="width" value="2000" />
+					<param name="diffuse" value="FF000000" />
+				</include>
+
+				<!-- Main Menu -->
+				<control type="list" id="9000">
+					<viewtype label="3D list">list</viewtype>
+					<orientation>horizontal</orientation>
+					<onup>SetFocus(701,0,absolute)</onup>
+					<ondown>9100</ondown>
+					<top>20</top>
+					<left>0</left>
+					<width>1920</width>
+					<itemlayout width="274.28" height="100">
+						<!-- Unfocused -->
+						<control type="label">
+							<posx>3</posx>
+							<posy>0</posy>
+							<height>100</height>
+							<width>274.28</width>
+							<align>center</align>
+							<aligny>center</aligny>
+							<font>font_menu</font>
+							<scroll>false</scroll>
+							<label>$INFO[ListItem.Label]</label>
+							<textcolor>$VAR[MainMenuUnfocusedColor]</textcolor>
+						</control>
+					</itemlayout>
+					<focusedlayout width="274.28" height="100">
+						<!-- Semi Focused -->
+						<control type="label">
+							<visible>!Control.HasFocus(9000)</visible>
+							<posx>3</posx>
+							<posy>0</posy>
+							<height>100</height>
+							<width>274.28</width>
+							<align>center</align>
+							<aligny>center</aligny>
+							<font>font_menu</font>
+							<label>$INFO[ListItem.Label]</label>
+							<textcolor>$VAR[MainMenuSemiFocusedColor]</textcolor>
+						</control>
+						<!-- Focused -->
+						<control type="label">
+							<visible>Control.HasFocus(9000)</visible>
+							<posx>3</posx>
+							<posy>0</posy>
+							<height>100</height>
+							<width>274.28</width>
+							<font>font_menu</font>
+							<align>center</align>
+							<aligny>center</aligny>
+							<label>$INFO[ListItem.Label]</label>
+							<textcolor>$VAR[MainMenuFocusedColor]</textcolor>
+						</control>
+					</focusedlayout>
+					<content>
+						<include>skinshortcuts-mainmenu</include>
+					</content>
+				</control>
+
+				<!-- SubMenu -->
+				<control type="list" id="9100">
+					<top>90</top>
+					<viewtype>list</viewtype>
+					<orientation>horizontal</orientation>
+					<onup>9000</onup>
+					<left>0</left>
+					<width>1920</width>
+					<itemlayout width="274.28" height="100">
+						<!-- Unfocused -->
+						<control type="label">
+							<posx>3</posx>
+							<posy>0</posy>
+							<height>100</height>
+							<width>274.28</width>
+							<align>center</align>
+							<aligny>center</aligny>
+							<font>font_submenu</font>
+							<scroll>false</scroll>
+							<label>$INFO[ListItem.Label]</label>
+							<textcolor>$VAR[SubMenuUnfocusedColor]</textcolor>
+						</control>
+					</itemlayout>
+					<focusedlayout width="274.28" height="100">
+						<!-- Focused -->
+						<control type="label">
+							<visible>Control.HasFocus(9100)</visible>
+							<posx>3</posx>
+							<posy>0</posy>
+							<height>100</height>
+							<width>274.28</width>
+							<align>center</align>
+							<aligny>center</aligny>
+							<font>font_submenu</font>
+							<label>$INFO[ListItem.Label]</label>
+							<textcolor>$VAR[SubMenuFocusedColor]</textcolor>
+						</control>
+						<!-- Unfocused -->
+						<control type="label">
+							<visible>!Control.HasFocus(9100)</visible>
+							<posx>3</posx>
+							<posy>0</posy>
+							<height>100</height>
+							<width>274.28</width>
+							<align>center</align>
+							<aligny>center</aligny>
+							<font>font_submenu</font>
+							<label>$INFO[ListItem.Label]</label>
+							<textcolor>$VAR[SubMenuUnfocusedColor]</textcolor>
+						</control>
+					</focusedlayout>
+					<content>
+						<include>skinshortcuts-submenu</include>
+					</content>
+				</control> 
+			</control>
+		</control>
+	</controls>
+</window>

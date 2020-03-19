@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<views>
+    <!-- movies, setmovies, tvshows, musicvideos, seasons, sets, episodes, artists, albums, songs, tvchannels, tvrecordings, programs, pictures -->
+	<view id="List" value="50" languageid="535" type="movies,setmovies,sets,tvshows,seasons,files"/>
+	<view id="Poster" value="51" languageid="20021" type="movies,setmovies,sets,tvshows,seasons,files" />
+	<view id="InfoWall" value="54" languageid="31101" type="movies,setmovies,sets,tvshows,seasons,episodes,musicvideos,artists,albums,pictures,files" />
+	<view id="WideList" value="55" languageid="31107" type="movies,setmovies,sets,tvshows,seasons,episodes,musicvideos,artists,albums,files" />
+	<view id="Wall" value="500" languageid="31102" type="movies,setmovies,sets,tvshows,seasons,episodes,musicvideos,artists,albums,pictures,files" />
+	<view id="FanArt" value="502" languageid="20445" type="movies,setmovies,sets,tvshows,seasons,episodes,musicvideos,files" />
+</views>

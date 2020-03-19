@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <overrides>
+        <override action="skin-shortcuts">
+             <action>ActivateWindow(SkinSettings)</action>
+             <action>RunScript(script.skinshortcuts,type=manage&amp;group=mainmenu)</action>
+        </override> 
+
+        <override action="globaloverride" group="searchmenu">
+            <action>Dialog.Close(all)</action>
+            <action>::ACTION::</action>
+        </override>
+
+        <override action="globaloverride" group="addonsmenu">
+            <action>Dialog.Close(all)</action>
+            <action>::ACTION::</action>
+        </override>
+    </overrides>    
+

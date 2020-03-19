@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+	<defaultcontrol always="true">50</defaultcontrol>
+	<backgroundcolor>background</backgroundcolor>
+	<!-- <views>50,51,52,54,55,500</views> -->
+	<views>55,54,500,50,51,502,52</views>
+	<menucontrol>9000</menucontrol>
+	<controls>
+		<include>DefaultBackground</include>
+		<control type="group">
+			<animation effect="fade" start="100" end="0" time="200" tween="sine" condition="$EXP[infodialog_active]">Conditional</animation>
+			<include>View_50_List</include>
+			<include>View_51_Poster</include>
+			<include>View_52_IconWall</include>
+			<include>View_54_InfoWall</include>
+			<include>View_55_WideList</include>
+			<include>View_500_Wall</include>
+			<include>View_502_FanArt</include>
+
+			<control type="image">
+				<left>0</left>
+				<top>0</top>
+				<width>100%</width>
+				<height>90</height>
+				<texture>frame/osdfade.png</texture>
+			</control>
+			
+			<!-- Custom -->
+			<control type="group">
+				<depth>DepthContentPanel</depth>
+				<include>OpenClose_Left</include>
+				<visible>Control.IsVisible(55)</visible>
+				<include>Visible_Left</include>
+				<include>ListThumbInfoPanel</include>
+			</control>
+
+			<control type="group">
+				<depth>DepthContentPanel</depth>
+				<include>OpenClose_Left</include>
+				<visible>Control.IsVisible(50) | Control.Isvisible(54)</visible>
+				<include>Visible_Left</include>
+				
+				<include content="ContentPanel">
+					<param name="width" value="670" />
+					<param name="width">500</param>
+					<param name="left">1280</param>
+					<param name="top">-10%</param>
+					<param name="height">120%</param>
+					<param name="flipx">true</param>
+					<param name="diffuse">FF000000</param>
+				</include>
+				
+				<control type="group">
+					<!-- <width>550</width> -->
+					<left>1325</left>
+					<control type="image" condition="!Container.Content(episodes)">
+						<left>15</left>
+						<top>90</top>
+						<width>550</width>
+						<height>366</height>
+						<fadetime>200</fadetime>
+						<aspectratio>scale</aspectratio>
+						<texture fallback="DefaultVideo.png" background="true">$INFO[ListItem.Art(fanart)]</texture>
+					</control>
+					<control type="image" condition="Container.Content(episodes)">
+						<visible>Container.Content(episodes)</visible>
+						<left>15</left>
+						<top>90</top>
+						<width>550</width>
+						<height>366</height>
+						<fadetime>200</fadetime>
+						<aspectratio>scale</aspectratio>
+						<texture fallback="DefaultVideo.png" background="true">$INFO[ListItem.Art(thumb)]</texture>
+					</control>
+					<control type="image" condition="Container.Content(seasons)">
+						<visible>Container.Content(seasons)</visible>
+						<left>15</left>
+						<top>90</top>
+						<width>550</width>
+						<height>366</height>
+						<fadetime>200</fadetime>
+						<aspectratio>scale</aspectratio>
+						<texture fallback="DefaultVideo.png" background="true">$INFO[ListItem.Art(fanart)]</texture>
+					</control>
+					<control type="textbox">
+						<top>480</top>
+						<left>20</left>
+						<width>550</width>
+						<aligny>center</aligny>
+						<height>50</height>
+						<font>font_title</font>
+						<label>$INFO[ListItem.Label]</label>
+						<textcolor>$VAR[AccentColor]</textcolor>
+						<visible>!Container.Content(files) + !Container.Content(episodes)</visible>
+					</control>
+					<control type="textbox">
+						<top>480</top>
+						<left>20</left>
+						<width>550</width>
+						<aligny>center</aligny>
+						<height>50</height>
+						<font>font_title</font>
+						<label>$INFO[ListItem.Title]</label>
+						<textcolor>$VAR[AccentColor]</textcolor>
+						<visible>[Container.Content(files) | Container.Content(episodes)] + !String.IsEmpty(ListItem.Title)</visible>
+					</control>
+					<control type="textbox">
+						<top>480</top>
+						<left>20</left>
+						<width>555</width>
+						<aligny>center</aligny>
+						<height>50</height>
+						<font>font_title</font>
+						<label>$INFO[ListItem.Label]</label>
+						<textcolor>$VAR[AccentColor]</textcolor>
+						<visible>[Container.Content(files) + Container.Content(episodes)] + String.IsEmpty(ListItem.Title)</visible>
+					</control>
+					<control type="textbox">
+						<left>20</left>
+						<top>545</top>
+						<width>525</width>
+						<height>425</height>
+						<font>font_description</font>
+						<visible>![ListItem.IsCollection + String.IsEmpty(ListItem.Plot)]</visible>
+						<label>$INFO[ListItem.Tagline,[I],[/I][CR][CR]]$INFO[ListItem.Plot][CR][CR]</label>
+						<autoscroll delay="10000" time="3000" repeat="10000">Skin.HasSetting(autoscroll)</autoscroll>
+					</control>
+					<control type="textbox">
+						<left>20</left>
+						<top>545</top>
+						<width>530</width>
+						<height>425</height>
+						<align>center</align>
+						<aligny>center</aligny>
+						<font>font27</font>
+						<textcolor>80FFFFFF</textcolor>
+						<label>$LOCALIZE[19055]</label>
+						<visible>String.IsEmpty(Listitem.Plot) + String.IsEmpty(Listitem.Tagline) + !ListItem.IsCollection + !ListItem.IsParentFolder</visible>
+					</control>
+					<control type="group">
+						<left>20</left>
+						<top>245</top>
+						<visible>ListItem.IsCollection + String.IsEmpty(ListItem.Plot)</visible>
+						<include content="InfoList">
+							<param name="bottom" value="108" />
+							<param name="width" value="540" />
+							<param name="sortby" value="year" />
+							<param name="sortorder" value="ascending" />
+							<param name="font" value="font13" />
+						</include>
+					</control>
+					<control type="group">
+						<left>275</left>
+						<top>75</top>
+						<include condition="Skin.HasSetting(circle_rating) | Skin.HasSetting(circle_userrating)">RatingCircle</include>
+					</control>
+				</control>
+				<include content="MediaFlagsBottom"></include>
+			</control>
+			<include content="TopBar">
+				<param name="breadcrumbs_label" value="$VAR[BreadcrumbsVideoVar]" />
+			</include>
+			<include>CommonScrollbars</include>
+			<include>MediaMenuMouseOverlay</include>
+			<control type="group">
+				<include>MediaMenuCommon</include>
+				<control type="grouplist" id="9000">
+					<top>50</top>
+					<include>MediaMenuListCommon</include>
+					<control type="button" id="10">
+						<description>Watched Toggle</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[20367]</label>
+						<label2>[B]$INFO[Container.NumItems][/B]</label2>
+						<visible>Container.Content(movies) | Container.Content(sets) | Container.Content(tvshows) | Container.content(seasons) | Container.Content(episodes)</visible>
+					</control>
+					<control type="label" id="203">
+						<include>MediaMenuLabelCommon</include>
+						<label>$LOCALIZE[31020]</label>
+					</control>
+					<control type="radiobutton" id="16">
+						<description>PartyMode</description>
+						<label>$LOCALIZE[589]</label>
+						<include>MediaMenuItemsCommon</include>
+						<visible>Container.Content(MusicVideos)</visible>
+					</control>
+					<control type="radiobutton" id="11">
+						<description>Unlock Shares</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[20336]</label>
+						<onclick>mastermode</onclick>
+						<selected>system.ismaster</selected>
+						<visible>system.haslocks</visible>
+					</control>
+					<control type="togglebutton" id="619">
+						<description>Update library</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[653]</label>
+						<onclick>UpdateLibrary(video)</onclick>
+						<visible>!Container.Content(addons)+ String.IsEmpty(Container.PluginName)</visible>
+						<altlabel>$LOCALIZE[13353]</altlabel>
+						<usealttexture>library.isscanningvideo</usealttexture>
+					</control>
+					<control type="button" id="612">
+						<description>Go to playlist</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[31056]</label>
+						<onclick>ActivateWindow(videoplaylist)</onclick>
+						<visible>Integer.IsGreater(Playlist.Length(video),0)</visible>
+					</control>
+					<control type="button" id="621">
+						<description>Get more</description>
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[21452]</label>
+						<onclick>ActivateWindow(addonbrowser,addons://more/video/,return)</onclick>
+						<visible>Container.Content(addons)</visible>
+					</control>
+					<control type="button" id="622">
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[31117]</label>
+						<onclick condition="System.HasAddon(plugin.library.node.editor)">ActivateWindow(programs,plugin://plugin.library.node.editor/?ltype=video,return)</onclick>
+						<onclick condition="!System.HasAddon(plugin.library.node.editor)">InstallAddon(plugin.library.node.editor)</onclick>
+						<visible>Container.Content() + String.IsEmpty(Container.PluginName)</visible>
+					</control>
+					<control type="button" id="623">
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[31009]</label>
+						<onclick>InstallAddon(resource.images.studios.white)</onclick>
+						<visible>Container.Content(studios) + !System.HasAddon(resource.images.studios.white)</visible>
+					</control>
+					<control type="button" id="626">
+						<include>MediaMenuItemsCommon</include>
+						<label>Settings</label>
+						<onclick>ActivateWindow(settings)</onclick>
+						<visible>!String.IsEmpty(Container.PluginName)</visible>
+					</control>
+					<control type="button" id="627">
+						<include>MediaMenuItemsCommon</include>
+						<label>Skin Settings</label>
+						<onclick>ActivateWindow(skinsettings)</onclick>
+						<visible>!String.IsEmpty(Container.PluginName)</visible>
+					</control>
+					<control type="button" id="625">
+						<include>MediaMenuItemsCommon</include>
+						<label>Favourites</label>
+						<onclick>ActivateWindow(Favourites)</onclick>
+						<visible>!String.IsEmpty(Container.PluginName)</visible>
+					</control>
+					<control type="button" id="624">
+						<include>MediaMenuItemsCommon</include>
+						<label>$LOCALIZE[10140]</label>
+						<onclick>Addon.OpenSettings($INFO[Container.PluginName])</onclick>
+						<visible>!String.IsEmpty(Container.PluginName)</visible>
+					</control>
+					<include>MediaMenuNowPlaying</include>
+				</control>
+			</control>
+		</control>
+	</controls>
+</window>
